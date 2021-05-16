@@ -81,8 +81,8 @@ preserve
 *d) Estimate a regression model predicting the outcome as a function of 
 	*exposure, mediator, the interaction of the exposure and mediator, and the 
 	*mediator-outcome confounder (C), using only the real observations.
-	regress disabwrk1 lowed##`m' if copy==1
-
+	regress disabwrk1 lowed##`m' numchild curmarried birthyear urbanprop sex if copy==1 // include both mediators, the one in the loop will drop out
+		//do we control for the second mediator? 
 *e) predict counterfactual when x=0 and m=0
 	capture drop cf_y_x0_m0
 	predict cf_y_x0_m0 if copy==2
