@@ -15,6 +15,7 @@ foreach level in `r(levels)' {
 	local loop = `loop'+1
 	}
 
+capture la drop state
 la def state 	1	"Alabama" ///
 				2	"Alaska" ///
 				3	"Arizona" ///
@@ -74,12 +75,12 @@ save, replace
 *****************************Setup and Var Generation***************************
 ********************************************************************************
 import delimited using "USHistoricalData.csv", clear // import csv file developed from Maria's file
-capture rename ï statefip
-drop if statefip==.
+capture rename ï state
+capture drop if state==.
 save USHistoricalData.dta, replace // save as .dta format
 
 merge 1:m state using "`dataproject2'" //merge with Data Project 2 ata
-
+drop if _merge==1 
 capture drop if adult==0 // drop if adults are still retained in dataset
 
 *Effect of education: lowed
