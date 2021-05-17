@@ -1,5 +1,20 @@
+*Needs to be run from start --> finish to preserve macros
+
 cd "/Users/leahkoenig/Box Sync/ETS PhD/Spring 2021/Epi 265/Data Project/Data Project 3/"
 local dataproject2 = "Census2000_1%Sample.dta"
+
+use `dataproject2', replace
+
+local loop = 1
+capture drop state
+gen state=.
+
+levelsof statefip 
+foreach level in `r(levels)' { 
+	replace state = `loop' if statefip==`level'
+	local loop = `loop'+1
+	}
+save, replace	
 ********************************************************************************
 *****************************Setup and Var Generation***************************
 ********************************************************************************
