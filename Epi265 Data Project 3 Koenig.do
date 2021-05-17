@@ -7,6 +7,8 @@ local loop = 1
 capture drop state
 gen state=.
 
+*Create a state variable where the numbering matches what is in the csv file
+
 levelsof statefip 
 foreach level in `r(levels)' { 
 	replace state = `loop' if statefip==`level'
@@ -76,7 +78,7 @@ capture rename ï statefip
 drop if statefip==.
 save USHistoricalData.dta, replace // save as .dta format
 
-merge 1:m statefip using "`dataproject2'" //merge with Data Project 2 ata
+merge 1:m state using "`dataproject2'" //merge with Data Project 2 ata
 
 capture drop if adult==0 // drop if adults are still retained in dataset
 
