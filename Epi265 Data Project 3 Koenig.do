@@ -80,7 +80,7 @@ capture drop if state==.
 save USHistoricalData.dta, replace // save as .dta format
 
 merge 1:m state using "`dataproject2'" //merge with Data Project 2 ata
-drop if _merge==1 
+
 capture drop if adult==0 // drop if adults are still retained in dataset
 
 *Effect of education: lowed
